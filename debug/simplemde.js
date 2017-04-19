@@ -16180,9 +16180,11 @@ function drawImage(editor) {
 	var url = "http://";
 	if(options.promptURLs) {
 		url = prompt(options.promptTexts.image);
-		if(!url) {
-			return false;
-		}
+	} else if(options.imageSelector) {
+		url = options.imageSelector();
+	}
+	if(!url) {
+		return false;
 	}
 	_replaceSelection(cm, stat.image, options.insertTexts.image, url);
 }
