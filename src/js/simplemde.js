@@ -638,7 +638,10 @@ function drawImage(editor) {
 	if(options.promptURLs) {
 		url = prompt(options.promptTexts.image);
 	} else if(options.imageSelector) {
-		url = options.imageSelector();
+		options.imageSelector(function(url) {
+			_replaceSelection(cm, stat.image, options.insertTexts.image, url);
+		});
+		return false;
 	}
 	if(!url) {
 		return false;
